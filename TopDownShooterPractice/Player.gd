@@ -9,6 +9,7 @@ export (int) var playerSpeed = 100
 
 
 onready var endOfGun = $EndOfGun
+onready var gunDirection = $EndOfGun
 
 
 func _ready():
@@ -47,7 +48,6 @@ func _unhandled_input(event: InputEvent) -> void:
 func shoot():
 	print("Player Shot")
 	var bullet_instance = Bullet.instance()
-	bullet_instance.global_position = endOfGun.global_position
-	var target = get_global_mouse_position()
-	var directionToMouse = endOfGun.global_position.direction_to(target).normalized()
+	# var direction = gunDirection
+	# TODO: 15:30 https://www.youtube.com/watch?v=9RP7Ujv0gdE
 	emit_signal("playerShotBullet", bullet_instance, endOfGun.global_position, directionToMouse)
