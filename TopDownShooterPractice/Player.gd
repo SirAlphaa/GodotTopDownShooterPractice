@@ -1,6 +1,9 @@
 extends KinematicBody2D
 
 
+signal playerShotBullet(bullet, position, direction)
+
+
 export (PackedScene) var Bullet
 export (int) var playerSpeed = 100
 
@@ -44,8 +47,7 @@ func _unhandled_input(event: InputEvent) -> void:
 func shoot():
 	print("Player Shot")
 	var bullet_instance = Bullet.instance()
-	add_child(bullet_instance)
 	bullet_instance.global_position = endOfGun.global_position
 	var target = get_global_mouse_position()
-	var directionToMouse = bullet_instance.global_position.direction_to(target).normalized()
-	bullet_instance.set_direction(directionToMouse)
+	var directionToMouse = endOfGun.global_position.direction_to(target).normalized()
+	emit_signal("playerShotBullet", bullet_instance, endOfGun.global_position, directionToMouse)
