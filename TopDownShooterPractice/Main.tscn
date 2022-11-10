@@ -9,7 +9,7 @@
 script = ExtResource( 4 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 60, 64 )
+position = Vector2( 48, 36 )
 Bullet = ExtResource( 2 )
 
 [node name="BulletManager" type="Node2D" parent="."]

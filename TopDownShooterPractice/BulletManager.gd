@@ -1,7 +1,7 @@
 extends Node2D
 
 
-func handleBulletSpawned(bullet, position, direction):
-	add_child(bullet)
-	bullet.global_position = position
-	bullet.set_direction(direction)
+func handleBulletSpawned(Bullet: Bullet, position: Vector2, direction: Vector2):
+	add_child(Bullet)
+	Bullet.global_position = position
+	Bullet.set_direction(direction)
