@@ -10,6 +10,8 @@ export (int) var playerSpeed = 100
 
 onready var endOfGun = $EndOfGun
 onready var gunDirection = $GunDirection
+onready var shootCooldown = $ShootCooldown
+onready var animationPlayer = $AnimationPlayer
 
 
 func _ready():
@@ -42,12 +44,17 @@ func _process(delta:float) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("shoot"):
 		shoot()
-		pass
 
 
 func shoot():
 	print("Player Shot")
-	var bullet_instance = Bullet.instance()
-	# var target = get_global_mouse_position()
-	var direction = endOfGun.global_position.direction_to(gunDirection.global_position).normalized()
-	emit_signal("playerShotBullet", bullet_instance, endOfGun.global_position, direction)
+	if shootCooldown.is_stopped():
+		var bullet_instance = Bullet.instance()
+		# var target = get_global_mouse_position()
+		var direction = endOfGun.global_position.direction_to(gunDirection.global_position).normalized()
+		emit_signal("playerShotBullet", bullet_instance, endOfGun.global_position, direction)
+		shootCooldown.start()
+		animationPlayer.play("muzzleFlash")
+	else:
+		print("shoot cooldown active")
+		print(shootCooldown.time_left)
