@@ -7,6 +7,8 @@ signal playerShotBullet(bullet, position, direction)
 export (PackedScene) var Bullet
 export (int) var playerSpeed = 100
 
+var health: int = 100
+
 
 onready var endOfGun = $EndOfGun
 onready var gunDirection = $GunDirection
@@ -58,3 +60,8 @@ func shoot():
 	else:
 		print("shoot cooldown active")
 		print(shootCooldown.time_left)
+
+func handleHit():
+	health -= 20
+	print("Player Hit!", health)
+	pass
